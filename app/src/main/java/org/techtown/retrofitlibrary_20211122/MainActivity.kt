@@ -2,8 +2,10 @@ package org.techtown.retrofitlibrary_20211122
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import org.json.JSONObject
 import org.techtown.retrofitlibrary_20211122.databinding.ActivityMainBinding
 import org.techtown.retrofitlibrary_20211122.datas.BasicResponse
 import retrofit2.Call
@@ -38,10 +40,25 @@ class MainActivity : BaseActivity() {
                     response: Response<BasicResponse>
                 ) {
 
-                    val basicResponse = response.body()!!
+                    if (response.isSuccessful){
 
-                    Toast.makeText(mContext,basicResponse.message, Toast.LENGTH_SHORT).show()
+                        val basicResponse = response.body()!!
 
+                        Toast.makeText(mContext,basicResponse.message, Toast.LENGTH_SHORT).show()
+
+
+
+                    }
+
+                   else{
+
+                    val errorJason = JSONObject(response.errorBody()!!.string())
+                        Log.d("에러경우", errorJason.toString())
+
+                        val message = errorJason.getString("message")
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
+                    }
 
                 }
 
