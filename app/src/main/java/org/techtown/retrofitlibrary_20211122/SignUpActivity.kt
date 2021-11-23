@@ -16,6 +16,8 @@ class SignUpActivity : BaseActivity() {
 
     lateinit var binding: ActivitySignUpBinding
 
+    var isDuplOk = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up)
@@ -34,6 +36,7 @@ class SignUpActivity : BaseActivity() {
 
 //            재검사 요청
             binding.txtEmailCheckResult.text = "이메일 중복검사를 해주세요."
+            isDuplOk= false
 
         }
 
@@ -48,12 +51,13 @@ class SignUpActivity : BaseActivity() {
                     if (response.isSuccessful){
 //                        code: 200 -> 사용해도 좋은 이메일.
                         binding.txtEmailCheckResult.text = "사용해도 좋은 이메일 입니다."
-                        
+                        isDuplOk=true
                         
                     }
                     else{
 //                        사용하면 안되는 이메일
                         binding.txtEmailCheckResult.text = "다른 이메일로 다시 검사해주세요."
+                        isDuplOk= false
                     }
 
                 }
@@ -69,6 +73,12 @@ class SignUpActivity : BaseActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
+
+            if (!isDuplOk){
+
+                Toast.makeText(mContext, "이메일 중복검사를 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
