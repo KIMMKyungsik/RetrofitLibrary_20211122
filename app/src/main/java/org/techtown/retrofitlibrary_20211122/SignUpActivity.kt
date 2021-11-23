@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import org.techtown.retrofitlibrary_20211122.databinding.ActivitySignUpBinding
 import org.techtown.retrofitlibrary_20211122.datas.BasicResponse
@@ -27,6 +28,14 @@ class SignUpActivity : BaseActivity() {
 
 
     override fun setupEvents() {
+
+
+        binding.edtEmail.addTextChangedListener {
+
+//            재검사 요청
+            binding.txtEmailCheckResult.text = "이메일 중복검사를 해주세요."
+
+        }
 
         binding.btnEmailCheck.setOnClickListener {
             val email = binding.edtEmail.text.toString()
