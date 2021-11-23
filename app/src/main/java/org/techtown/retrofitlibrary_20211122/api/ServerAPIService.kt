@@ -17,18 +17,17 @@ interface ServerAPIService {
         @Field("email") email: String,
         @Field("password") pw: String,
 
-    ) : Call<BasicResponse>
+        ): Call<BasicResponse>
 
-//회원 가입 기능 명세
+    //    회원 가입 기능 명세
 
     @FormUrlEncoded
     @PUT("/user")
     fun putRequestSignUp(
         @Field("email") email: String,
         @Field("password") pw: String,
-        @Field("nick_name") nickname: String,
-    ) : Call<BasicResponse>
-
+        @Field("nick_name") nick: String,
+    ): Call<BasicResponse>
 
 
 }
