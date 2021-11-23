@@ -1,26 +1,25 @@
 package org.techtown.retrofitlibrary_20211122
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import org.json.JSONObject
-import org.techtown.retrofitlibrary_20211122.databinding.ActivityMainBinding
+import org.techtown.retrofitlibrary_20211122.databinding.ActivityLoginBinding
 import org.techtown.retrofitlibrary_20211122.datas.BasicResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         setupEvents()
         setValues()
