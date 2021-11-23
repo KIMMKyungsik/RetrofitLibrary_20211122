@@ -2,6 +2,7 @@ package org.techtown.retrofitlibrary_20211122
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import org.techtown.retrofitlibrary_20211122.databinding.ActivitySignUpBinding
 import org.techtown.retrofitlibrary_20211122.datas.BasicResponse
@@ -34,6 +35,15 @@ class SignUpActivity : BaseActivity() {
 
         apiService.putRequestSignUp(email, password, nickname).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+
+
+                if (response.isSuccessful){
+                    val br = response.body()!!
+
+                    Log.d("가입한사람 토큰",br.data.token)
+
+                }
 
             }
 
