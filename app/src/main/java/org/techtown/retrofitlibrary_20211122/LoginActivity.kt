@@ -51,6 +51,7 @@ class LoginActivity : BaseActivity() {
 
                         getMyInfoFromKakao()
 
+
                     }
                 }
             } else {
@@ -115,6 +116,12 @@ class LoginActivity : BaseActivity() {
                                 )
                                     .show()
 
+
+                                val myIntent = Intent (mContext,MainActivity::class.java)
+                                startActivity(myIntent)
+
+                                finish()
+
                             } else {
 
                                 val errorJason = JSONObject(response.errorBody()!!.string())
@@ -139,34 +146,63 @@ class LoginActivity : BaseActivity() {
         }
 
 
-
     }
 
     override fun setValues() {
 
     }
 
-    fun getMyInfoFromKakao(){
+    fun getMyInfoFromKakao() {
 
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e("카톡 로그인", "사용자 정보 요청 실패", error)
-            }
-            else if (user != null) {
-                Log.i("카톡 로그인", "사용자 정보 요청 성공" +
-                        "\n회원번호: ${user.id}" +
-                        "\n이메일: ${user.kakaoAccount?.email}" +
-                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}")
+            } else if (user != null) {
+                Log.i(
+                    "카톡 로그인", "사용자 정보 요청 성공" +
+                            "\n회원번호: ${user.id}" +
+                            "\n이메일: ${user.kakaoAccount?.email}" +
+                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}"
+                )
+                apiService.postRequestSocialLogin(
+                    "kakao",
+                    user.id.toString(),
+                    user.kakaoAccount?.profile?.nickname!!
+                ).enqueue(object : Callback<BasicResponse> {
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+
+
+                        if (response.isSuccessful){
+
+                            val br = response.body()!!
+
+                            Toast.makeText(mContext, "${br.data.user.nickname}", Toast.LENGTH_SHORT).show()
+
+                            val myIntent = Intent (mContext,MainActivity::class.java)
+                            startActivity(myIntent)
+
+                            finish()
+
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+
+                })
+
+
             }
         }
 
 
-
-
     }
-
-
-
 
 
 }
