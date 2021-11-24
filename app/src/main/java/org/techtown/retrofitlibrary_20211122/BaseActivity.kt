@@ -12,6 +12,8 @@ abstract class BaseActivity :AppCompatActivity() {
 
     lateinit var mContext:Context
 
+
+
     lateinit var apiService : ServerAPIService
 
     override fun onCreate(savedInstanceState: Bundle?) {
