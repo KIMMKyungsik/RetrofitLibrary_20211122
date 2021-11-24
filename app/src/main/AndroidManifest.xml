@@ -13,6 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetrofitLibrary_20211122"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao51fdc971acfcb03e2bb7eedd93660978" />
+            </intent-filter>
+        </activity>
+
+
+
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
