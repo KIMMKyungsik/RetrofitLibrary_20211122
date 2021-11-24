@@ -116,6 +116,8 @@ class LoginActivity : BaseActivity() {
                                 )
                                     .show()
 
+//                                토큰값 추출 -> 기기에 저장 ( SharedPreferences)
+
 
                                 val myIntent = Intent (mContext,MainActivity::class.java)
                                 startActivity(myIntent)
