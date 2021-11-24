@@ -11,7 +11,7 @@ import org.techtown.retrofitlibrary_20211122.R
 import org.techtown.retrofitlibrary_20211122.databinding.FragmentMyProfileBinding
 import org.techtown.retrofitlibrary_20211122.utils.ContextUtil
 
-class MyProfileFragment :Fragment(){
+class MyProfileFragment : BaseFragment() {
     lateinit var binding: FragmentMyProfileBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,16 +19,29 @@ class MyProfileFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-         binding = DataBindingUtil.inflate(inflater,
-             R.layout.fragment_my_profile, container, false)
-      return binding.root
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_my_profile, container, false
+        )
+        return binding.root
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-    Log.d("토큰값 확인", ContextUtil.getToken(requireContext()))
+        setupEvents()
+        setValues()
+
+    }
+
+    override fun setupEvents() {
+
+
+    }
+
+    override fun setValues() {
+
 
     }
 
